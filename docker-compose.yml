@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: stadium
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-stadium_local_pwd}
+      POSTGRES_DB: stadium
+    volumes: [pgdata:/var/lib/postgresql/data]
+    ports: ["127.0.0.1:5433:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stadium -d stadium"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: ./apps/api
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      ENV: ${ENV:-development}
+      DATABASE_URL: postgresql+psycopg://stadium:${POSTGRES_PASSWORD:-stadium_local_pwd}@db:5432/stadium
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-change-me-dev-secret-change-me}
+      SEED_DEMO_USERS: ${SEED_DEMO_USERS:-true}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000}
+    volumes: [uploads:/srv/uploads]
+    ports: ["127.0.0.1:8000:8000"]
+
+  web:
+    build:
+      context: ./apps/web
+      args: { API_URL: "http://api:8000" }
+    depends_on: [api]
+    ports: ["3000:3000"]
+
+volumes:
+  pgdata:
+  uploads:

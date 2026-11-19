@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #060a14;
+  --color-ink-900: #0b1120;
+  --color-ink-800: #111a2e;
+  --color-ink-700: #1a2540;
+  --color-gold-300: #f3d28a;
+  --color-gold-400: #e9b44c;
+  --color-gold-500: #d99a2b;
+  --color-clay-500: #c8553d;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+:root { color-scheme: dark; }
+html, body { background: var(--color-ink-950); color: #e6ebf5; font-family: var(--font-sans); }
+body { min-height: 100dvh; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--color-gold-400); outline-offset: 2px; }
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center rounded-lg px-3.5 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-45; }
+  .btn-primary { @apply bg-sky-500 text-white hover:bg-sky-400; }
+  .btn-gold { @apply bg-gold-400 text-ink-950 hover:bg-gold-300; }
+  .btn-ghost { @apply border border-white/15 bg-white/5 text-slate-100 hover:bg-white/10; }
+  .btn-danger { @apply bg-clay-500 text-white hover:bg-red-500; }
+  .card { @apply rounded-2xl border border-white/10 bg-ink-800/70; }
+  .field { @apply w-full rounded-lg border border-white/15 bg-ink-900 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-gold-400 focus:outline-none; }
+  .label { @apply mb-1 block text-xs font-medium uppercase tracking-wider text-slate-400; }
+  .chip { @apply inline-flex items-center rounded-full border border-white/15 bg-white/5 px-2.5 py-0.5 text-xs text-slate-200; }
+}
+
+.scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: #2b3a5c; border-radius: 8px; }
