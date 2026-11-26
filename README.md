@@ -46,4 +46,4 @@ cd apps/web && npx playwright test    # parcours bout en bout (API + web démarr
 (Créez d'abord la base `stadium_test` : `docker compose exec db createdb -U stadium stadium_test`.)
 
 ## Passage en production
-Définir `ENV=production`, `SECRET_KEY` (≥ 32 car.), `COOKIE_SECURE=true` (HTTPS), `SEED_DEMO_USERS=false`, un `DATABASE_URL` non par défaut, et créer le premier administrateur via `ADMIN_EMAIL` / `ADMIN_PASSWORD`. Voir `.env.example` et `docs/`
+Définir `ENV=production`, `SECRET_KEY` (≥ 32 car.), `COOKIE_SECURE=true` (HTTPS), `SEED_DEMO_USERS=false`, un `DATABASE_URL` non par défaut, et créer le premier administrateur via `ADMIN_EMAIL` / `ADMIN_PASSWORD`. Voir `.env.example` et `docs/`.
