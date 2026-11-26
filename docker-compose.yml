@@ -19,7 +19,7 @@ services:
       db: { condition: service_healthy }
     environment:
       ENV: ${ENV:-development}
-      
+      DATABASE_URL: postgresql+psycopg://stadium:${POSTGRES_PASSWORD:-stadium_local_pwd}@db:5432/stadium
       SECRET_KEY: ${SECRET_KEY:-dev-secret-change-me-dev-secret-change-me}
       SEED_DEMO_USERS: ${SEED_DEMO_USERS:-true}
       COOKIE_SECURE: ${COOKIE_SECURE:-false}
